@@ -1,0 +1,21 @@
+CREATE TABLE companhias (
+	id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL UNIQUE,
+	abbreviation TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE aeroportos (
+	id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL UNIQUE ,
+	abbreviation TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE voos (
+	id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL UNIQUE ,
+	"companyId" INTEGER NOT NULL REFERENCES "companhias"("id"),
+	"startPortId" INTEGER NOT NULL REFERENCES "aeroportos"("id"),
+	"arrivedPortId" INTEGER NOT NULL REFERENCES "aeroportos"("id"),
+	"arrivedHour" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+	"startHour" TIMESTAMP WITHOUT TIME ZONE NOT NULL
+);
